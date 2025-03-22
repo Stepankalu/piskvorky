@@ -1,25 +1,75 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     background: linear-gradient(to bottom, #615dad, #ffc8da);
-    height: 100vh;
     margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
 }
 
-h1,
-p,
-a {
+.piskvorky_uvod {
+    background-color: #1f3b4d;
+    color: white;
+    width: 360px;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.uvodni_text {
+    background-color: #283e50;
+    font-family: sans-serif;
     color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+    padding: 20px;
 }
 
 h1 {
     font-family: Lobster;
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
-p,
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+}
+
 a {
+    text-decoration: none;
+    padding: 15px;
+    font-size: 16px;
     font-family: sans-serif;
+    text-align: center;
+    color: white;
 }
 
+.zeleny {
+    background-color: #2ecc71;
+    color: white;
+}
+.zeleny:hover {
+    background-color: #27ae60;
+}
+
+.modry {
+    background-color: #3498db;
+}
+
+.modry:hover {
+    background-color: #2980b9;
+}

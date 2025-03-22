@@ -1,0 +1,42 @@
+body {
+    height: 100vh;
+    background: linear-gradient(to bottom, #615dad, #ffc8da);
+    
+}
+
+h1 {
+    font-family: lobster;
+}
+
+div {
+    color: #ffffff;
+}
+
+.obrazek {
+    display: flex;
+    flex-direction: column;
+    width: 335px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px, 5px, 0px, 0px;
+}
+
+.uvodni_text {
+    display: flex;
+    flex-direction: column;
+    background-color: #283e50;
+    width: 335px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px, 5px, 0px, 0px;
+}
+
+.tlacitka_pravidla {
+    background-color: #1fcca4;
+}
+
+.tlacitka_hrat {
+    background-color: #0197f6;
+}

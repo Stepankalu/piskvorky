@@ -1,4 +1,9 @@
 /* style pro index.html */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
 body {
     background: linear-gradient(to bottom, #615dad, #ffc8da);
     margin: 0;
@@ -154,4 +159,36 @@ h1 {
   }
 
 /* Herní pole */
-
+  
+  body {
+    background: linear-gradient(to bottom, #615dad, #ffc8da);
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  
+  /* Herního pole (10×10) */
+  .herni_pole {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1px;                    
+    width: 500px;               
+    max-width: 80vmin;            
+    margin: 30px auto;         
+    background-color: #1f3b4d;  
+  }
+  
+  .policko {
+    background-color: #f3e6f6;
+    border: none;               
+    width: 100%;
+    aspect-ratio: 1 / 1;        
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .policko:hover,
+  .policko:focus {
+    background-color: #eaddf1;
+  }
+  

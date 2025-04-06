@@ -1,3 +1,4 @@
+/* style pro index.html */
 body {
     background: linear-gradient(to bottom, #615dad, #ffc8da);
     margin: 0;
@@ -22,8 +23,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-}
-
+} 
 .uvodni_text {
     background-color: #283e50;
     font-family: sans-serif;
@@ -73,3 +73,85 @@ a {
 .modry:hover {
     background-color: #2980b9;
 }
+
+/* Style pro hra.html*/
+
+.piskvorky_hra {
+    margin: 0;
+    max-width: 80vmin;
+}
+
+.stavovy_panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-family: 'Lobster', cursive;
+    font-size: 3rem; 
+    margin: 0 0 20px 0;
+  }
+
+/* text Hraje: */
+
+.stav_hry_text {
+    display: flex;
+    align-items: center;
+  }
+
+.tah_label {
+    color: white;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  /* Tlačítka domů a reset */
+.ovladaci_panel {
+    display: flex;
+    gap: 10px; 
+  }
+  
+  .btn {
+    display: inline-flex;       
+    align-items: center;
+    justify-content: center;
+    width: 20px;                
+    height: 20px;
+    border-radius: 5px;         
+  }
+  
+  .btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+  
+  /* Tlačítko „Domů“ – zelené */
+  .domu {
+    background-color: #2ecc71;
+    color: white;
+  }
+  .domu:hover,
+  .domu:focus {
+    background-color: #27ae60;
+    opacity: 0.9;
+  }
+  
+  /* Tlačítko „Reset“ – modré */
+  .reset {
+    background-color: #3498db;
+    color: white;
+  }
+  .reset:hover,
+  .reset:focus {
+    background-color: #2980b9;
+    opacity: 0.9;
+  }
+
+/* Herní pole */
+

@@ -1,22 +1,18 @@
 /* style pro index.html */
 
 *, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-}
+    box-sizing: border-box;
+  }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to bottom, #615dad, #ffc8da);
-  font-family: sans-serif;
+    background: linear-gradient(to bottom, #615dad, #ffc8da);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
 }
 
 .piskvorky_uvod {
@@ -88,18 +84,9 @@ a {
 /* Style pro hra.html*/
 
 .piskvorky_hra {
-    width: 100%;          
-    max-width: 500px;     
-    margin: 0 auto;          
-    padding: 10px;         
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 600px) {
-    .piskvorky_hra {
-      width: 100%;
-    }
-  }
+    margin: 0;
+    max-width: 80vmin;
+}
 
 .stavovy_panel {
     display: flex;
@@ -169,11 +156,11 @@ a {
   .herni_pole {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    gap: 1px;
-    width: 100%;           
-    max-width: 500px;      
-    background-color: #1f3b4d;
-    border-radius: 5px;
+    gap: 1px;                    
+    width: 500px;               
+    max-width: 80vmin;            
+    margin: 30px auto;         
+    background-color: #1f3b4d;  
   }
   
   .policko {

@@ -1,77 +1,95 @@
 import { findWinner } from 'https://unpkg.com/piskvorky@0.1.4'
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 1) Kdo je právě na tahu
-  let currentPlayer = 'circle';
+let currentPlayer = 'circle'
+const fields = document.querySelectorAll('.policko')
+const statusSymbol = document.querySelector('.stav_symbol')
+const resetBtn = document.querySelector('a.btn.reset')
 
-  // 2) Všechna políčka a stavový symbol
-  const fields = document.querySelectorAll('.policko');
-  const statusSymbol = document.querySelector('.stav_symbol');
+// Aktualizuje ikonku tahu
+const updateStatus = () => {
+  statusSymbol.src = `images/${currentPlayer}.svg`
+  statusSymbol.alt = currentPlayer === 'circle' ? 'Kolečko' : 'Křížek'
+}
 
-  // 3) Tlačítko pro restart
-  const resetBtn = document.querySelector('a.btn.reset');
+const handleFieldClick = async (e) => {
+  // Můj tah
+  const field = e.target
+  field.classList.add(currentPlayer === 'circle' ? 'kolecko' : 'krizek')
+  field.disabled = true
 
-  // 4) Vykreslení ikonky tahu
-  function updateStatus() {
-    statusSymbol.src = `images/${currentPlayer}.svg`;
-    statusSymbol.alt = currentPlayer === 'circle' ? 'Kolečko' : 'Křížek';
+  const board = Array.from(fields).map(f => {
+    if (f.classList.contains('krizek'))  return 'x'
+    if (f.classList.contains('kolecko')) return 'o'
+    return '_'
+  })
+
+  // Kontrola výhry 
+  let winner = findWinner(board)
+  if (winner === 'x' || winner === 'o' || winner === 'tie') {
+    setTimeout(() => {
+      alert(
+        winner === 'tie'
+          ? 'Hra skončila remízou.'
+          : `Vyhrál hráč se symbolem ${winner}.`
+      )
+      location.reload()
+    }, 0)
+    return
   }
 
-  // 5) Co se stane po kliknutí na políčko
-  function handleFieldClick(e) {
-    const field = e.target;
-    const symbolClass = currentPlayer === 'circle' ? 'kolecko' : 'krizek';
-    field.classList.add(symbolClass);
-    field.disabled = true;
+  // Tah AI 
+  currentPlayer = 'cross'
+  updateStatus()
 
-    // Sestavíme pole pro findWinner: 'x', 'o' nebo '_'
-    const board = Array.from(fields).map(f => {
-      if (f.classList.contains('krizek'))  return 'x';
-      if (f.classList.contains('kolecko')) return 'o';
-      return '_';
-    });
-
-    // Zjistíme výsledek
-    const winner = findWinner(board);
-
-    if (winner === 'x' || winner === 'o') {
-      // Timeout, aby se symbol stihl vykreslit
-      setTimeout(() => {
-        alert(`Vyhrál hráč se symbolem ${winner}.`);
-        location.reload();
-      }, 0);
-      return;
+  const response = await fetch(
+    'https://piskvorky.czechitas-podklady.cz/api/suggest-next-move',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ board: board, player: 'x' })
     }
+  )
+  const data = await response.json()
 
-    if (winner === 'tie') {
-      setTimeout(() => {
-        alert('Hra skončila remízou.');
-        location.reload();
-      }, 0);
-      return;
-    }
+  const aiIndex = data.position.x + data.position.y * 10
+  fields[aiIndex].classList.add('krizek')
+  fields[aiIndex].disabled = true
 
-    // Žádný vítěz, přepneme hráče a aktualizujeme stav
-    currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
-    updateStatus();
+  // Kontrola výhry
+  const board2 = Array.from(fields).map(f => {
+    if (f.classList.contains('krizek'))  return 'x'
+    if (f.classList.contains('kolecko')) return 'o'
+    return '_'
+  })
+  winner = findWinner(board2)
+  if (winner === 'x' || winner === 'o' || winner === 'tie') {
+    setTimeout(() => {
+      alert(
+        winner === 'tie'
+          ? 'Hra skončila remízou.'
+          : `Vyhrál hráč se symbolem ${winner}.`
+      )
+      location.reload()
+    }, 0)
+    return
   }
 
-  // 6) Připojení listenerů
-  fields.forEach(field => {
-    field.addEventListener('click', handleFieldClick);
-  });
+  // Zpět na kolečko
+  currentPlayer = 'circle'
+  updateStatus()
+}
 
-  // 7) Reset hry
-  resetBtn.addEventListener('click', e => {
-    e.preventDefault();
-    currentPlayer = 'circle';
-    fields.forEach(field => {
-      field.disabled = false;
-      field.classList.remove('kolecko', 'krizek');
-    });
-    updateStatus();
-  });
+// Připojíme listener na políčka a tlačítko reset
+fields.forEach(f => f.addEventListener('click', handleFieldClick))
 
-  // První vykreslení
-  updateStatus();
-});
+resetBtn.addEventListener('click', e => {
+  e.preventDefault()
+  currentPlayer = 'circle'
+  fields.forEach(f => {
+    f.disabled = false
+    f.classList.remove('kolecko', 'krizek')
+  })
+  updateStatus()
+})
+
+updateStatus()
